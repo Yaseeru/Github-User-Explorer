@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { User } from '../types';
 
 interface Props {
@@ -6,7 +7,10 @@ interface Props {
 
 const UserProfile = ({ user }: Props) => {
   return (
-    <div className="text-center border p-6 rounded-xl shadow bg-white">
+    <div
+      className="text-center border p-6 rounded-xl shadow bg-white"
+      aria-label="GitHub user profile"
+    >
       <img
         src={user.avatar_url}
         alt={`${user.login}'s avatar`}
@@ -14,7 +18,9 @@ const UserProfile = ({ user }: Props) => {
       />
       <h2 className="text-xl font-bold">{user.login}</h2>
       <p className="text-gray-600">{user.bio || 'No bio available'}</p>
-      <p className="mt-2">Followers: {user.followers}</p>
+      <p className="mt-2">
+        <span className="font-medium">Followers:</span> {user.followers}
+      </p>
       <a
         href={user.html_url}
         target="_blank"
@@ -27,4 +33,4 @@ const UserProfile = ({ user }: Props) => {
   );
 };
 
-export default UserProfile;
+export default memo(UserProfile);
